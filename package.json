@@ -9,23 +9,18 @@
   },
   "license": "ISC",
   "devDependencies": {
-    "electron": "8.4.0"
-  },
-  "dependencies": {
-    "iohook": "^0.6.6"
+    "electron": "11.2.3"
   },
   "iohook": {
     "targets": [
-      "electron-76"
+      "node-83",
+      "electron-85"
     ],
     "platforms": [
-      "win32",
-      "darwin",
-      "linux"
+      "darwin"
     ],
     "arches": [
-      "x64",
-      "ia32"
+      "x64"
     ]
   }
 }

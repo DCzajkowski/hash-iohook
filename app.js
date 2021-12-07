@@ -1,9 +1,23 @@
 const {app, BrowserWindow} = require('electron')
 const path = require('path')
 const url = require('url')
-const iohook = require('iohook')
+const NodeHookAddon = require('../../iohook/build/Release/iohook.node')
 
-let window = null
+NodeHookAddon.startHook((event) => {
+  if (event !== undefined && event.type <= 5) {
+    console.log(event)
+  }
+}, true)
+
+// const iohook = require('../iohook/index.js')
+
+// iohook.on('keypress', event => {
+//   console.log(event)
+// })
+
+// iohook.start(true)
+
+// let window = null
 
 // Wait until the app is ready
 app.once('ready', () => {
@@ -31,4 +45,20 @@ app.once('ready', () => {
   window.once('ready-to-show', () => {
     window.show()
   })
+
+  // window.on('focus', () => {
+  //   NodeHookAddon.stopHook()
+  // })
+
+  // window.on('blur', () => {
+  //   NodeHookAddon.startHook((event) => {
+  //     console.log(event)
+  //   }, true)
+  // })
+})
+
+app.on('before-quit', () => {
+  console.log(NodeHookAddon);
+
+  NodeHookAddon.stopHook()
 })
